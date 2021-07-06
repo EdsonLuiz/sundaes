@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    "jest-dom",
+    "testing-library"
+  ],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:jest-dom/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
+}
