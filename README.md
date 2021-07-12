@@ -45,3 +45,45 @@
   )
   ```
 `waitForElementToBeRemoved` is an assertion on its own.
+
+# Mock Service Worker
+- Intercept network calls.
+- return specified responses.
+- Prevents network calls during the tests.
+- Set up test conditions using server responses.
+
+## Installation
+
+```shell
+yarn add msw
+```
+
+- **Create handlers**: functions that determine what is returned for a specific URL.
+- **Create test server**: this handle requests.
+- **Make sure test server listen during all tests.**
+  - Reset the server after each test.
+
+## Configuration
+1. Create a file `src/mocks/handlers.js` for handler.
+```js
+import { rest } from 'msw'
+
+export const handlers = [
+  rest.get('http://localhost:3030/scoops', (req, res, ctx) => {
+    return res(
+      ctx.json([
+        { name: 'Chocolate', imgPath: '/images/chocolate.png' },
+        { name: 'Vanilla', imgPath: '/images/vanilla.png' }
+      ])
+    )
+  })
+]
+```
+
+2. Create a file `src/mocks/server.js` for server.
+```js
+import { setupServer } from 'msw/node'
+import { handlers } from './handlers'
+
+export const server = setupServer(...handlers)
+```
