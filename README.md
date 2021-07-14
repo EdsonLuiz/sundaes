@@ -87,3 +87,6 @@ import { handlers } from './handlers'
 
 export const server = setupServer(...handlers)
 ```
+
+# Await and findBy
+When you are waiting for something to appear asynchronously on the page, you must use `await finbBy`.
